@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rw2=rl@d*dl_)2caoqbd2y4a=^m0un4gp%ob5hrwidz)7i+r$&
 DEBUG = True
 
 # ALLOWED_HOSTS = ['0.0.0.0',]
-ALLOWED_HOSTS = ['0.0.0.0','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','0.0.0.0',]
 # ALLOWED_HOSTS = ['*','0.0.0.0']
 
 
@@ -79,10 +79,19 @@ WSGI_APPLICATION = 'superteam.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # } from lab 31 
+    'default':{
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'postgres',
+        'USER':'postgres',
+        'PASSWORD':'postgres',
+        'HOST':'db',
+        'PORT':5432,
+    } # HOST MUST BE (the same in docker compse file)
+
 }
 
 
@@ -107,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Permissions to use Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 
